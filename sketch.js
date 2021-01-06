@@ -127,8 +127,8 @@ function draw() {
   drawSprites();
   textSize(17);
   fill("black");
-  text("I am your Puppy Muku.. I am Hungry ",100,150);
-  text("Long Press up arrow key to feed your pet Dog Muku",50,50);
+ // text("I am your Puppy Muku.. I am Hungry ",100,150);
+//  text("Long Press up arrow key to feed your pet Dog Muku",50,50);
   text("Milk Bottles Remaining  "+foodS,170,440);
 }
 
