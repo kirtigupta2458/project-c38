@@ -4,10 +4,9 @@ var milk, milkImg;
 var gameState;
 var bedroom,garden,livingroom,washroom;
 
-
 function preload(){
-  dogImg = loadImage("Dog.png");
-  dogHappyImg = loadImage("happydog.png");
+  sadDog = loadImage("Dog.png");
+  happyDog = loadImage("happydog.png");
   milkImg = loadImage("milk.png");
   bedroom = loadImage("Bed Room.png");
   garden = loadImage("Garden.png");
@@ -19,44 +18,40 @@ function setup() {
   database = firebase.database();
   createCanvas(500, 500);
 
-  Feed=new feed();
+  foodObj=new Food();
   
   dog = createSprite(250,250,10,10);
-  dog.addImage(dogImg);
+  dog.addImage(sadDog);
   dog.scale = 0.15;
-
-  emo = createSprite(200,200,1,1);
   
   foodStock = database.ref('food');
   foodStock.on("value",readStock);
   foodStock.set(20);
   
-  milk = createSprite(140,435,10,10);
-  milk.addImage(milkImg);
-  milk.scale = 0.025;
+  milkBotltle1 = createSprite(140,435,10,10);
+  milkBotltle1.addImage(milkImg);
+  milkBotltle1.scale = 0.025;
 
-  milk1 = createSprite(210,280,10,10);
-  milk1.addImage(milkImg);
-  milk1.scale = 0.025;
-  milk1.visible = false;
+  milkBotltle2 = createSprite(210,280,10,10);
+  milkBotltle2.addImage(milkImg);
+  milkBotltle2.scale = 0.025;
+  milkBotltle2.visible = false;
 
-
-  
 }
 
 
 function draw() {  
   background("yellow")
 
-  Feed.display();
+  foodObj.display();
   writeStock(foodS);
   
   if(foodS == 0){
-    dog.addImage(dogHappyImg);
-    milk1.visible=false;
+    dog.addImage(happyDog);
+    milkBotltle2.visible=false;
   }else{
-    dog.addImage(dogImg);
-    milk1.visible=true;
+    dog.addImage(sadDog);
+    milkBotltle2.visible=true;
   }
   var gameStateRef=database.ref('gameState');
   gameStateRef.on('value',function(data){
@@ -64,14 +59,14 @@ function draw() {
   });
 
   if(gameState===1){
-    dog.addImage(dogHappyImg);
+    dog.addImage(happyDog);
     dog.scale=0.175;
     dog.y=250;
   }
   if(gameState===2){
-    dog.addImage(dogImg);
+    dog.addImage(sadDog);
     dog.scale=0.175;
-    milk1.visible=false;
+    milkBotltle2.visible=false;
     dog.y=250;
   }
   
@@ -84,7 +79,7 @@ function draw() {
   if(gameState===3){
     dog.addImage(washroom);
     dog.scale=1;
-    milk1.visible=false;
+    milkBotltle2.visible=false;
   }
 
   var Sleep=createButton("I am very sleepy");
@@ -96,7 +91,7 @@ function draw() {
   if(gameState===4){
     dog.addImage(bedroom);
     dog.scale=1;
-    milk1.visible=false;
+    milkBotltle2.visible=false;
   }
 
   var Play=createButton("Lets play !");
@@ -108,7 +103,7 @@ function draw() {
   if(gameState===5){
     dog.addImage(livingroom);
     dog.scale=1;
-    milk1.visible=false;
+    milkBotltle2.visible=false;
   }
 
   var PlayInGarden=createButton("Lets play in park");
@@ -121,14 +116,12 @@ function draw() {
     dog.y=175;
     dog.addImage(garden);
     dog.scale=1;
-    milk1.visible=false;
+    milkBotltle2.visible=false;
   }
 
   drawSprites();
   textSize(17);
   fill("black");
- // text("I am your Puppy Muku.. I am Hungry ",100,150);
-//  text("Long Press up arrow key to feed your pet Dog Muku",50,50);
   text("Milk Bottles Remaining  "+foodS,170,440);
 }
 
@@ -142,4 +135,3 @@ function writeStock(x){
     food:x
   })
 }
-
