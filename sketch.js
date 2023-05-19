@@ -59,15 +59,10 @@ function draw() {
   });
 
   if(gameState===1){
-    dog.addImage(happyDog);
-    dog.scale=0.175;
-    dog.y=250;
+    
   }
   if(gameState===2){
-    dog.addImage(sadDog);
-    dog.scale=0.175;
-    milkBotltle2.visible=false;
-    dog.y=250;
+    
   }
   
   var Bath=createButton("I want to take bath");
@@ -77,9 +72,7 @@ function draw() {
     database.ref('/').update({'gameState':gameState});
   }));
   if(gameState===3){
-    dog.addImage(washroom);
-    dog.scale=1;
-    milkBotltle2.visible=false;
+    
   }
 
   var Sleep=createButton("I am very sleepy");
@@ -89,9 +82,7 @@ function draw() {
     database.ref('/').update({'gameState':gameState});
   }));
   if(gameState===4){
-    dog.addImage(bedroom);
-    dog.scale=1;
-    milkBotltle2.visible=false;
+    
   }
 
   var Play=createButton("Lets play !");
@@ -101,9 +92,7 @@ function draw() {
     database.ref('/').update({'gameState':gameState});
   }));
   if(gameState===5){
-    dog.addImage(livingroom);
-    dog.scale=1;
-    milkBotltle2.visible=false;
+    
   }
 
   var PlayInGarden=createButton("Lets play in park");
@@ -113,10 +102,7 @@ function draw() {
     database.ref('/').update({'gameState':gameState});
   }));
   if(gameState===6){
-    dog.y=175;
-    dog.addImage(garden);
-    dog.scale=1;
-    milkBotltle2.visible=false;
+    
   }
 
   drawSprites();
